@@ -5,7 +5,8 @@ Developed for 0xPARC.
 Contract on Goerli: [`0xc4490d6407f81378c8d3620eA11092B2FC429Df2`](https://goerli.etherscan.io/address/0xc4490d6407f81378c8d3620eA11092B2FC429Df2)
 
 ## Getting started
-### Python environment
+### Environment
+#### Python environment
 
 If you're doing Web3 or dev work seriously, just install pyenv and never look back:
 ```
@@ -35,13 +36,13 @@ And life becomes marginally less painful.
 
 **These should be done including `source .venv/bin/activate` for next steps**
 
-### Use node v16
+#### Use node v16
 ```
 nvm install 16
 nvm use 16
 ```
 
-### For circom helper
+#### For circom helper
 Without these intallations, errors happens while generating cpp files.
 ```
 brew install nlohmann-json
@@ -52,6 +53,55 @@ You can check the r1cs file with the following command.
 ```
 npx snarkjs r1cs info build/test/NftMint_test.r1cs
 ```
+
+#### Other dependencies
+```
+brew install wget
+```
+
+### How to Test
+1. Run circom-helper in `circuits` folder
+  ```
+  npm run circom-helper
+  ```
+
+2. Run test in `circuits` folder on other terminal
+  ```
+  npm run test 
+  ```
+
+3. zkey-manager-compile
+  ```
+  cp -r zkeys zkeys.bak2 // if there are already zkeys
+  npm run zkey-manager-compile
+  ```
+
+  If there occurs an error like this:
+  ```
+  /bin/sh: ../../.cargo/bin/circom: No such file or directory
+  ```
+
+  Change the `circum` binary path in zkeys.config.yml:
+  ```
+  circomPath: "../../../../.cargo/bin/circom"
+  ```
+
+4. zkey-manager-downloadPtau
+   ```
+   npm run zkey-manager-downloadPtau
+   ```
+   If there is no ptau file on the server, just copy a phase 2 ptau file from another project when running a local test program.
+
+5. zkey-manager-genZkeys
+   ```
+   npm run zkey-manager-genZkeys
+   ```
+
+5. export-verifier-sol
+   ```
+   npm run build
+   npm run export-verifiler-sol
+   ```
 
 ### How to Run
 Clone this repository and install dependencies:
